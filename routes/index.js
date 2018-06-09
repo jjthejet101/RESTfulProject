@@ -27,7 +27,12 @@ const Artist = sequelize.define(
     freezeTableName: true, 
     timestamps: false 
   } 
-); 
+);
+
+/* using model to query db */  
+Artist.find({ where: { ArtistId: 75 } }).then(artists => {  
+  console.log(artists);  
+}); 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
