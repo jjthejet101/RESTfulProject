@@ -4,6 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+/* required dependencies */ 
+const sqlite3 = require('sqlite3').verbose(); 
+const Sequelize = require('Sequelize'); 
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -19,6 +23,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+/* established connection with db */ 
+const sequelize = new Sequelize('Sqlize Project', 'justin', null, { 
+  host: 'localhost', 
+  dialect: 'sqlite', 
+  storage: './Chinook_Sqlite_AutoIncrementPKs.sqlite' 
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
