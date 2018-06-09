@@ -29,27 +29,10 @@ const Artist = sequelize.define(
   } 
 );
 
-// /* using model to query db */  
-// Artist.findAll({}).then(artists => {  
-//   console.log(JSON.stringify(artists));  
-// }); 
-
-// get all Artists
-router.get('/api/v1/artists', (req, res) => {
-  req.getConnection((err, connection) => {
-    const query = connection.query('SELECT * FROM Artist', (err, rows) => {
-      if (err) return res.send(500, 'Error occurred: database error.');
-      res.json(
-        rows.map(artist => {
-          return {
-            ArtistId: artist.ArtistId,
-            Name: artist.Name
-          };
-        })
-      );
-    });
-  });
-});
+/* using model to query db */   
+Artist.find({ where: { ArtistId: 75 } }).then(artists => {   
+  console.log(artists);   
+});  
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
