@@ -10,7 +10,24 @@ const sequelize = new Sequelize('Sqlize Project', 'justin', null, {
   host: 'localhost', 
   dialect: 'sqlite', 
   storage: './Chinook_Sqlite_AutoIncrementPKs.sqlite' 
-}); 
+});
+
+/* created model to interact with db */  
+const Artist = sequelize.define( 
+  'Artist', 
+  { 
+    ArtistId: { 
+      type: Sequelize.INTEGER, 
+      autoIncrement: true, 
+      primaryKey: true 
+    }, 
+    Name: Sequelize.STRING 
+  }, 
+  { 
+    freezeTableName: true, 
+    timestamps: false 
+  } 
+); 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
