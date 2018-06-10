@@ -57,16 +57,4 @@ router.get('/', function(req, res, next) {
   };
 });
 
-// /* GET Albums */
-// router.get('/', function(req, res, next) {
-//   let queryAlbum = req.query.musicRequest;
-//   if (queryAlbum == "album-artist") {
-//     sequelize.query(`SELECT Artist.Name as Artist, Album.Title as Album FROM Artist JOIN Album WHERE Artist.ArtistId=Album.ArtistId LIMIT 1000`).then(myTableRows => {
-//       res.send(myTableRows);
-//     });
-//   } else {
-//     res.render('error', { message: '404 - Not Found: Could not find the ' + queryAlbum + ' table in the database.' });
-//   };
-// });
-
 module.exports = router;
