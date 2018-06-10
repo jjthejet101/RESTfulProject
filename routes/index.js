@@ -6,7 +6,7 @@ const sqlite3 = require('sqlite3').verbose();
 const Sequelize = require('Sequelize'); 
 
 /* established connection with db */ 
-const sequelize = new Sequelize('Sqlize Project', 'justin', null, { 
+const sequelize = new Sequelize('RESTful Project', 'justin', null, { 
   host: 'localhost', 
   dialect: 'sqlite', 
   storage: './Chinook_Sqlite_AutoIncrementPKs.sqlite' 
@@ -31,12 +31,20 @@ const Artist = sequelize.define(
 
 /* using model to query db */   
 Artist.find({ where: { ArtistId: 75 } }).then(artists => {   
-  console.log(artists);   
+  console.log(JSON.stringify(artists));
 });  
+
+
+
+// sequelize.query("SELECT Title FROM Album").then(myTableRows => {
+//   console.log(myTableRows);
+// });
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  sequelize.query("SELECT Title FROM Album").then(myTableRows => {
+    res.send(myTableRows);
+  });
 });
 
 module.exports = router;
