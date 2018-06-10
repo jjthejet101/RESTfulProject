@@ -1,0 +1,54 @@
+<style>
+    div {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    h1 {
+        text-decoration: underline;
+        margin-bottom: 5px;
+    }
+
+    p:last-of-type {
+        margin-top: 0px;
+        margin-bottom: 25px;
+    }
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td {
+        border: 2px solid black;
+        text-align: left;
+        padding: 12px;
+    }
+
+    th {
+        font-size: 20px;
+        border: 2px solid black;
+        text-align: left;
+        padding: 12px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+<table>
+    <tr>
+        <th>Track Name</th>
+        <th>Track Length</th>
+    </tr>
+    {{#each results}}
+    <tr>
+        <td>{{Name}}</td>
+        <td>{{Milliseconds}}</td>
+    </tr>
+    {{/each}}
+</table>

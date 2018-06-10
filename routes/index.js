@@ -30,20 +30,9 @@ const Artist = sequelize.define(
   } 
 );
 
-/* using model to query db */   
-// Artist.find({ where: { ArtistId: 75 } }).then(artists => {   
-//   console.log(JSON.stringify(artists));
-// });  
-
-
-
-// sequelize.query("SELECT Title FROM Album").then(myTableRows => {
-//   console.log(myTableRows);
-// });
-
 /* GET Albums and Album-Artist */
 router.get('/', function(req, res, next) {
-  let queryAlbum = req.query.musicRequest;
+  const queryAlbum = req.query.musicRequest;
   if (queryAlbum == "albums") {
     sequelize.query("SELECT Title FROM Album").then(myTableRows => {
       res.send(myTableRows);
@@ -59,12 +48,17 @@ router.get('/', function(req, res, next) {
 
 /* GET Albums and Album-Artist */
 router.get('/tracks', function(req, res, next) {
-  let queryMinutes = req.query.musicTrackMinutes;
-  let querySeconds = req.query.musicTrackSeconds;
-  let millisecs = (parseInt(queryMinutes) * 60 + parseInt(querySeconds)) * 1000;
-  let query = `SELECT Name, Milliseconds FROM Track WHERE Milliseconds > ${millisecs} LIMIT 1000`;
+  const queryMinutes = req.query.musicTrackMinutes;
+  const querySeconds = req.query.musicTrackSeconds;
+  const millisecs = (parseInt(queryMinutes) * 60 + parseInt(querySeconds)) * 1000;
+  const query = `SELECT Name, Milliseconds FROM Track WHERE Milliseconds > ${millisecs} LIMIT 1000`;
+  const tracksArray = [];
+  console.log('variables added');
   sequelize.query(query).then(myTableRows => {
-    res.send(myTableRows);
+    tracksArray.push(myTableRows);
+    console.log('sequelized');
+    res.render('length', {results: myTableRows});
+    console.log('rendered');
   });
 });
 
