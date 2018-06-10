@@ -41,24 +41,24 @@ const Artist = sequelize.define(
 //   console.log(myTableRows);
 // });
 
-// /* GET Albums and Album-Artist */
-// router.get('/', function(req, res, next) {
-//   let queryAlbum = req.query.musicRequest;
-//   if (queryAlbum == "albums") {
-//     sequelize.query("SELECT Title FROM Album").then(myTableRows => {
-//       res.send(myTableRows);
-//     });
-//   } else if (queryAlbum == "album-artist") {
-//     sequelize.query(`SELECT Artist.Name as Artist, Album.Title as Album FROM Artist JOIN Album WHERE Artist.ArtistId=Album.ArtistId LIMIT 1000`).then(myTableRows => {
-//       res.send(myTableRows);
-//     });
-//   } else {
-//     res.render('error', { message: '404 - Not Found: Could not find the ' + queryAlbum + ' table in the database.' });
-//   };
-// });
-
 /* GET Albums and Album-Artist */
 router.get('/', function(req, res, next) {
+  let queryAlbum = req.query.musicRequest;
+  if (queryAlbum == "albums") {
+    sequelize.query("SELECT Title FROM Album").then(myTableRows => {
+      res.send(myTableRows);
+    });
+  } else if (queryAlbum == "album-artist") {
+    sequelize.query(`SELECT Artist.Name as Artist, Album.Title as Album FROM Artist JOIN Album WHERE Artist.ArtistId=Album.ArtistId LIMIT 1000`).then(myTableRows => {
+      res.send(myTableRows);
+    });
+  } else {
+    res.render('error', { message: '404 - Not Found: Could not find the ' + queryAlbum + ' table in the database.' });
+  };
+});
+
+/* GET Albums and Album-Artist */
+router.get('/tracks', function(req, res, next) {
   let queryMinutes = req.query.musicTrackMinutes;
   let querySeconds = req.query.musicTrackSeconds;
   let millisecs = (parseInt(queryMinutes) * 60 + parseInt(querySeconds)) * 1000;
