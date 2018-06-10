@@ -30,9 +30,9 @@ const Artist = sequelize.define(
 );
 
 /* using model to query db */   
-Artist.find({ where: { ArtistId: 75 } }).then(artists => {   
-  console.log(JSON.stringify(artists));
-});  
+// Artist.find({ where: { ArtistId: 75 } }).then(artists => {   
+//   console.log(JSON.stringify(artists));
+// });  
 
 
 
@@ -42,9 +42,14 @@ Artist.find({ where: { ArtistId: 75 } }).then(artists => {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  sequelize.query("SELECT Title FROM Album").then(myTableRows => {
-    res.send(myTableRows);
-  });
+  let queryAlbum = req.query.musicRequest;
+  console.log('variable declared');
+  if (queryAlbum == "albums") {
+    console.log('true');
+    sequelize.query("SELECT Title FROM Album").then(myTableRows => {
+      res.send(myTableRows);
+    });
+  };
 });
 
 module.exports = router;
